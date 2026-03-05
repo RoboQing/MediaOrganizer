@@ -4,8 +4,8 @@ browse_roots:
 
 # 允许作为输出的根目录（可多个）
 output_roots:
-  - /out/media1
-  - /out/media2
+  - /data/media1
+  - /data/media2
 
 default_movie_quality: "1080p"
 default_season: 1
