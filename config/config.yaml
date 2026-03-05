@@ -1,0 +1,18 @@
+﻿# 允许浏览的根目录（强烈建议只允许 /data 这类挂载点）
+browse_roots:
+  - /data
+
+# 允许作为输出的根目录（可多个）
+output_roots:
+  - /out/media1
+  - /out/media2
+
+default_movie_quality: "1080p"
+default_season: 1
+
+# 硬链接跨文件系统失败时怎么做：error | symlink | copy
+cross_device_fallback: "error"
+
+tmdb:
+  base_url: "https://api.themoviedb.org/3"
+  language: "zh-CN"

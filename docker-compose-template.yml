@@ -1,0 +1,18 @@
+services:
+  backend:
+    build: ./backend
+    environment:
+      - TMDB_API_KEY=${TMDB_API_KEY}
+    volumes:
+      - /path/to/your/config:/config:ro
+      - /path/to/your/data:/data:rw
+      - /path/to/your/out:/out:rw
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"

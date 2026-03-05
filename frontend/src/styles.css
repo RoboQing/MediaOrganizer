@@ -1,0 +1,13 @@
+html, body, #root { height: 100%; margin: 0; }
+.app {
+  height: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+}
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.file-row.selected,
+.dir-row.selected {
+  background: rgba(22, 119, 255, 0.12) !important;
+}
