@@ -1,6 +1,6 @@
 import type { ApiConfig, TreeResp, TmdbItem, LinkPlan } from "./types";
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = "/api";
 
 async function j<T>(res: Response): Promise<T> {
   if (!res.ok) {
@@ -11,19 +11,19 @@ async function j<T>(res: Response): Promise<T> {
 }
 
 export async function getConfig(): Promise<ApiConfig> {
-  const res = await fetch(`${API_BASE}/api/config`);
+  const res = await fetch(`${API_BASE}/config`);
   return j<ApiConfig>(res);
 }
 
 export async function getTree(path: string): Promise<TreeResp> {
-  const u = new URL(`${API_BASE}/api/tree`);
+  const u = new URL(`${window.location.origin}${API_BASE}/tree`);
   u.searchParams.set("path", path);
   const res = await fetch(u.toString());
   return j<TreeResp>(res);
 }
 
 export async function tmdbSearch(query: string): Promise<TmdbItem[]> {
-  const res = await fetch(`${API_BASE}/api/tmdb/search`, {
+  const res = await fetch(`${API_BASE}/tmdb/search`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query }),
@@ -43,7 +43,7 @@ export type PlanReq = {
 };
 
 export async function buildPlan(req: PlanReq): Promise<LinkPlan[]> {
-  const res = await fetch(`${API_BASE}/api/plan`, {
+  const res = await fetch(`${API_BASE}/plan`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(req),
@@ -52,7 +52,7 @@ export async function buildPlan(req: PlanReq): Promise<LinkPlan[]> {
 }
 
 export async function applyPlan(plans: LinkPlan[]): Promise<{ ok: number; errors: string[] }> {
-  const res = await fetch(`${API_BASE}/api/apply`, {
+  const res = await fetch(`${API_BASE}/apply`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ plans }),

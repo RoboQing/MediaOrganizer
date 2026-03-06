@@ -8,12 +8,20 @@ services:
     volumes:
       - /path/to/your/config:/config:ro
       - /path/to/your/data:/data:rw
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
 
   frontend:
     build: ./frontend
+    expose:
+      - "80"
+
+  nginx:
+    image: nginx:alpine
     depends_on:
+      - frontend
       - backend
     ports:
-      - "5173:5173"
+      - "ports_to_expose:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
